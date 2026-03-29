@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "e1f9323a49540937a4cc",
+  "position": {
+    "x": 309.6,
+    "y": 69.12,
+    "z": 0,
+    "height": 532.80000000000007,
+    "width": 203.04000000000002,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "total_sales"
+                }
+              },
+              "queryRef": "_Measure.total_sales",
+              "nativeQueryRef": "total_sales"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Orders"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "Orders.City",
+              "nativeQueryRef": "City"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

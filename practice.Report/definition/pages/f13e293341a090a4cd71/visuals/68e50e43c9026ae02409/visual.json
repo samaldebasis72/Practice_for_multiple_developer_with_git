@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "68e50e43c9026ae02409",
+  "position": {
+    "x": 0,
+    "y": 183.68600682593856,
+    "z": 1000,
+    "height": 299.79522184300339,
+    "width": 374.74402730375425
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Measure 2"
+                }
+              },
+              "queryRef": "_Measure.Measure 2",
+              "nativeQueryRef": "Measure 2"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Orders"
+                    }
+                  },
+                  "Property": "Region"
+                }
+              },
+              "queryRef": "Orders.Region",
+              "nativeQueryRef": "Region"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "treatas"
+                }
+              },
+              "queryRef": "_Measure.treatas",
+              "nativeQueryRef": "treatas"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

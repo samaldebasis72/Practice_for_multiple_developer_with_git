@@ -1,0 +1,80 @@
+relationship a4b991bf-2bf6-410c-93ea-728d20cf5e95
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Orders.Column
+	toColumn: LocalDateTable_a459e2d1-bc71-43b0-98bc-53f13d23b815.Date
+
+relationship 41dc0f23-6ba5-4440-9206-4c70897e600c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Orders.'Column 2'
+	toColumn: LocalDateTable_83ad3bbd-2700-4951-a711-62dc923547e8.Date
+
+relationship fd152602-1a5f-44f4-8d72-e3208df64ac4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Orders.'Ship Date'
+	toColumn: LocalDateTable_4f178de5-98dc-4368-912e-e27db3c88642.Date
+
+relationship ee707927-fcf6-7702-6831-53c90c74c76a
+	fromColumn: Orders.'Order ID'
+	toColumn: Returns.'Order ID'
+
+relationship d05f9c8e-4577-4e78-9429-eefa1b4670f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'no to date convertion'.Custom
+	toColumn: LocalDateTable_3d2bd859-75b7-403b-a8be-4b1348757f2d.Date
+
+relationship f3bb2569-1fbe-4031-bdc3-b73d5b426194
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fy.Date
+	toColumn: LocalDateTable_883392b1-d0fc-4677-8f53-e0e8e9a5e46e.Date
+
+relationship 5a09b6c5-b1d4-9da6-e87b-d20c24b7fa83
+	fromColumn: Orders.'Order Date'
+	toColumn: fy.Date
+
+relationship c8aae43d-623e-48ac-a8fb-35d9f35b110c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: weakend.Date
+	toColumn: LocalDateTable_c80a1673-0018-400d-bf7c-9899b811ce21.Date
+
+relationship 3180eb32-4525-51f9-5100-dbc42d759d79
+	fromColumn: Orders.'Order Date'
+	toColumn: cal.Date
+
+relationship 5e000f1c-8a21-4632-8b75-204c8368afbf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Cal_Date.Date
+	toColumn: LocalDateTable_993d6b39-be3b-426e-b936-d89a4207473c.Date
+
+relationship a5259293-42a4-4c71-aa37-2b368b1be3bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Cal_Date.'last_month_same day'
+	toColumn: LocalDateTable_5fb585fb-6fe5-40bd-83b0-4007cead04c3.Date
+
+relationship 2b7021d1-bd9c-da36-0d43-a0f96e6b06ef
+	fromColumn: sales_data.Date
+	toColumn: cal.Date
+
+relationship f383382e-b272-47ae-8f01-e61feee72e4c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'calculate table'.Column
+	toColumn: LocalDateTable_b15b6367-72f5-40ba-b3ea-5508d29b8b56.Date
+
+relationship f6e374b2-65b4-4dec-8c77-7626d04420f0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'calculate table'.'Column 2'
+	toColumn: LocalDateTable_2290e522-2666-490a-8e2b-6803999c085e.Date
+
+relationship 54db86dd-438b-402a-957e-03043a120b7c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'calculate table'.'Order Date'
+	toColumn: LocalDateTable_4905d161-9db4-452e-8bff-4a7845ff5622.Date
+
+relationship 66f5d437-82c5-49ce-90c9-ec53b062876e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'calculate table'.'Ship Date'
+	toColumn: LocalDateTable_9ac35381-ce20-4e0c-8204-1593d49804df.Date
+
+relationship AutoDetected_68216e47-396d-4665-87ab-8167471319fb
+	fromColumn: Orders.Region
+	toColumn: RLS.Region
+

@@ -1,0 +1,30 @@
+table 'name string'
+	lineageTag: a0b09368-bfff-4b53-9eda-3ff7537d3b70
+
+	column Name
+		dataType: string
+		lineageTag: bf490f23-a66b-4feb-b188-4890a52fe0be
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = IF(CONTAINSSTRING('name string'[Name],"Debasis"),"Debasis","sss")
+		lineageTag: 12812ab1-a748-41a3-bca4-15ec5e9524bc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'name string' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcklNSizOLFaK1YlWcixG5uUmpiL4sQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Name = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Name", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

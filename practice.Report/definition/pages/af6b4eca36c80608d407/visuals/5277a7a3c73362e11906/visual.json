@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "5277a7a3c73362e11906",
+  "position": {
+    "x": 450.50279329608941,
+    "y": 132.2905027932961,
+    "z": 2000,
+    "height": 332.513966480447,
+    "width": 829.49720670391071,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "CALCULATE",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#3165bb"
+                    }
+                  },
+                  {
+                    "value": "([total_sales],[total cost]>",
+                    "textStyle": {
+                      "fontSize": "20pt"
+                    }
+                  },
+                  {
+                    "value": "50",
+                    "textStyle": {
+                      "fontSize": "20pt",
+                      "color": "#098658"
+                    }
+                  },
+                  {
+                    "value": ")",
+                    "textStyle": {
+                      "fontSize": "20pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "we cant use directy a measure as afilter ,we should use with filter function and all",
+                    "textStyle": {
+                      "fontSize": "20pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

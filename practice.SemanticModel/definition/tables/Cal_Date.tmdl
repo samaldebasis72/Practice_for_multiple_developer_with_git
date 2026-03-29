@@ -1,0 +1,90 @@
+table Cal_Date
+	lineageTag: 9f2e58c3-7f2e-4e9c-add3-df78120163fc
+
+	column Date
+		formatString: General Date
+		lineageTag: 6ef15eb6-e323-4b66-a7a0-3f882d2f1c27
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 5e000f1c-8a21-4632-8b75-204c8368afbf
+			defaultHierarchy: LocalDateTable_993d6b39-be3b-426e-b936-d89a4207473c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		formatString: 0
+		lineageTag: 0fe9654e-4dde-4503-9ad1-726762853227
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_no
+		formatString: 0
+		lineageTag: 5979ae0c-ad50-462c-8562-9b479da83d3a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [month_no]
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: string
+		lineageTag: d1b73520-1746-4a24-bc1c-09fa518585a6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [month]
+		sortByColumn: month_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column weak_no
+		formatString: 0
+		lineageTag: 8fd07304-5213-4c51-ae14-0512e3aac441
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [weak_no]
+
+		annotation SummarizationSetBy = Automatic
+
+	column wweak_day
+		formatString: 0
+		lineageTag: 04991151-8093-445e-a696-089d21adb3bb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [wweak_day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'last_month_same day'
+		formatString: General Date
+		lineageTag: 05ec0a29-8acd-423c-9070-6c41597e6d02
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [last_month_same day]
+
+		variation Variation
+			isDefault
+			relationship: a5259293-42a4-4c71-aa37-2b368b1be3bd
+			defaultHierarchy: LocalDateTable_5fb585fb-6fe5-40bd-83b0-4007cead04c3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column count = COUNTX(Cal_Date,Cal_Date[weak_no]*Cal_Date[wweak_day])
+		formatString: 0
+		lineageTag: 0c8de870-216a-4e65-b270-841926926e3d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Cal_Date = calculated
+		mode: import
+		source = ADDCOLUMNS(CALENDARAUTO(),"day",DAY([Date]),"month_no",MONTH([Date]),"month",FORMAT([date],"mmm"),"weak_no",WEEKNUM([Date]),"wweak_day",WEEKDAY([date]),"last_month_same day",EDATE([Date],-1))
+
+	annotation PBI_Id = 3a727c0e1ef94a1e9d3d36395bb3a1c5
+

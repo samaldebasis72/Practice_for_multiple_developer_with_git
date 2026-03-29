@@ -1,0 +1,57 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Orders","People","Returns","rowid","_Measure","no to date convertion","MAx row","partition by","sales_data","Rankkkkk","Parameter1","RLS","name string","RangeStart","RangeEnd"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table Orders
+ref table DateTableTemplate_caf2b376-44d1-425f-9f8c-7f7e77b23431
+ref table People
+ref table Returns
+ref table rowid
+ref table cal
+ref table _Measure
+ref table LocalDateTable_a459e2d1-bc71-43b0-98bc-53f13d23b815
+ref table LocalDateTable_83ad3bbd-2700-4951-a711-62dc923547e8
+ref table 'summerize table'
+ref table summerize_column
+ref table LocalDateTable_4f178de5-98dc-4368-912e-e27db3c88642
+ref table 'no to date convertion'
+ref table LocalDateTable_3d2bd859-75b7-403b-a8be-4b1348757f2d
+ref table 'top 20'
+ref table fy
+ref table LocalDateTable_883392b1-d0fc-4677-8f53-e0e8e9a5e46e
+ref table weakend
+ref table LocalDateTable_c80a1673-0018-400d-bf7c-9899b811ce21
+ref table Cal_Date
+ref table LocalDateTable_993d6b39-be3b-426e-b936-d89a4207473c
+ref table LocalDateTable_5fb585fb-6fe5-40bd-83b0-4007cead04c3
+ref table 'MAx row'
+ref table 'partition by'
+ref table f1
+ref table sales_data
+ref table Rankkkkk
+ref table 'calculate table'
+ref table LocalDateTable_b15b6367-72f5-40ba-b3ea-5508d29b8b56
+ref table LocalDateTable_2290e522-2666-490a-8e2b-6803999c085e
+ref table LocalDateTable_4905d161-9db4-452e-8bff-4a7845ff5622
+ref table LocalDateTable_9ac35381-ce20-4e0c-8204-1593d49804df
+ref table Parameter
+ref table sal
+ref table 'Parameter 2'
+ref table RLS
+ref table 'name string'
+ref table Dynamic_slicer
+
+ref role Practice_RLS
+
+ref cultureInfo en-US
+

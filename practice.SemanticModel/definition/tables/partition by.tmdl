@@ -1,0 +1,33 @@
+table 'partition by'
+	lineageTag: 50c74d8f-76ae-48fc-ab2b-8b8ca17c2c57
+
+	column nme
+		dataType: string
+		lineageTag: bd510aeb-7e0f-4636-86e6-22a13f22e053
+		summarizeBy: none
+		sourceColumn: nme
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c98ea9c-be71-4212-a6b7-c14da870f624
+		summarizeBy: sum
+		sourceColumn: sales
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'partition by' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WSlbSUTI0MFCK1YGwjaBsRyDbGME0QTBNIUwXJMUuYMUItglITSwA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [nme = _t, sales = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"nme", type text}, {"sales", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

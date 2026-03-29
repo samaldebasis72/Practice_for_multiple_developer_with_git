@@ -1,0 +1,53 @@
+table fy
+	lineageTag: 0ec0a122-cad6-4d12-86aa-cb160341aa89
+
+	column Date
+		formatString: General Date
+		lineageTag: b17970d2-82ef-4ed6-9f0f-7738b5d46ab2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: f3bb2569-1fbe-4031-bdc3-b73d5b426194
+			defaultHierarchy: LocalDateTable_883392b1-d0fc-4677-8f53-e0e8e9a5e46e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column year = YEAR([Date])
+		formatString: 0
+		lineageTag: b4a8b7f6-31d5-4d8c-92ee-07fade4730b7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column month = ```
+			MONTH(fy[Date]) 
+			```
+		formatString: 0
+		lineageTag: d9bac3c8-2cd1-4184-b588-5bec9cfa6bc1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = IF(fy[month]<=3,fy[month]+9,fy[month]-3)
+		formatString: 0
+		lineageTag: e7bd7c43-eac3-49d5-951b-b9962d38f624
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Column 2' = FORMAT(fy[Date],"MMMM")
+		lineageTag: 3c9397b2-ee51-43e3-b13f-70ff9f3da1e7
+		summarizeBy: none
+		sortByColumn: Column
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fy = calculated
+		mode: import
+		source = CALENDARAUTO()
+
+	annotation PBI_Id = f5432634c0ac4b71b11d04ec152b2444
+

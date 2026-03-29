@@ -1,0 +1,52 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "8a92d2448cd7208badfb",
+  "position": {
+    "x": 140.46639231824415,
+    "y": 0,
+    "z": 1000,
+    "height": 300.24691358024688,
+    "width": 403.84087791495193,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Orders"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "Orders.City",
+              "nativeQueryRef": "City"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Measure 17"
+                }
+              },
+              "queryRef": "_Measure.Measure 17",
+              "nativeQueryRef": "Measure 17"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

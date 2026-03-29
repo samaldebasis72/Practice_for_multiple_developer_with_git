@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "0b55adbd4765171d548a",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 360,
+    "width": 529.92000000000007
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "partition by"
+                    }
+                  },
+                  "Property": "nme"
+                }
+              },
+              "queryRef": "partition by.nme",
+              "nativeQueryRef": "nme"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "partition by"
+                    }
+                  },
+                  "Property": "sales"
+                }
+              },
+              "queryRef": "Sum(partition by.sales)",
+              "nativeQueryRef": "sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Rankxxxx"
+                }
+              },
+              "queryRef": "_Measure.Rankxxxx",
+              "nativeQueryRef": "Rankxxxx"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "partition by"
+                  }
+                },
+                "Property": "nme"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

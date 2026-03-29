@@ -1,0 +1,44 @@
+table 'no to date convertion'
+	lineageTag: 157cfe26-b47e-41f3-8360-23890723f2d4
+
+	column Custom
+		dataType: dateTime
+		formatString: mm/dd/yy
+		lineageTag: fb787d73-1441-4428-85c6-f502d0e8a698
+		summarizeBy: none
+		sourceColumn: Custom
+
+		variation Variation
+			isDefault
+			relationship: d05f9c8e-4577-4e78-9429-eefa1b4670f0
+			defaultHierarchy: LocalDateTable_3d2bd859-75b7-403b-a8be-4b1348757f2d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition 'no to date convertion' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjQwMDO0tDRWitWBc0yQOabIHDNkjjkyx0IpNhYA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [dob = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"dob", Int64.Type}}),
+				    #"Split Column by Position" = Table.SplitColumn(Table.TransformColumnTypes(#"Changed Type", {{"dob", type text}}, "en-US"), "dob", Splitter.SplitTextByPositions({0, 2}, false), {"dob.1", "dob.2"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Position",{{"dob.1", Int64.Type}, {"dob.2", Int64.Type}}),
+				    #"Split Column by Position1" = Table.SplitColumn(Table.TransformColumnTypes(#"Changed Type1", {{"dob.2", type text}}, "en-US"), "dob.2", Splitter.SplitTextByPositions({0, 4}, true), {"dob.2.1", "dob.2.2"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Split Column by Position1",{{"dob.2.1", Int64.Type}, {"dob.2.2", Int64.Type}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type2",6,06,Replacer.ReplaceValue,{"dob.2.1"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Replaced Value",{{"dob.1", type text}, {"dob.2.1", type text}, {"dob.2.2", type text}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type3","6","06",Replacer.ReplaceText,{"dob.2.1"}),
+				    #"Added Custom" = Table.AddColumn(#"Replaced Value1", "Custom", each [dob.2.2]&[dob.2.1]&[dob.1]),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom",{{"Custom", type date}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type4",{"dob.1", "dob.2.1", "dob.2.2"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

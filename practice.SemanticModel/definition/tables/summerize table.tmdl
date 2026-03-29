@@ -1,0 +1,35 @@
+table 'summerize table'
+	lineageTag: 2f632dfb-dd85-409e-8951-2771e4fbbaaf
+
+	column Region
+		lineageTag: db685201-3d0a-45b1-9098-2b93e2be4482
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Region]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		lineageTag: b95ac564-11e8-4cdc-9c64-4ff452c1d40a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Country]
+
+		annotation SummarizationSetBy = Automatic
+
+	column sum
+		lineageTag: 654b8405-d263-4e5f-af1f-c43ef004c00b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [sum]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'summerize table' = calculated
+		mode: import
+		source = SUMMARIZE(Orders,Orders[Region],Orders[Country],"sum",[total_sales])
+
+	annotation PBI_Id = b4400379767f46e6b2f12d86bb5f3c40
+

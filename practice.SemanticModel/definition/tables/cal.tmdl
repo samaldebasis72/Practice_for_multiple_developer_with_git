@@ -1,0 +1,113 @@
+table cal
+	lineageTag: e47b8e19-6fa0-4145-94ca-27d064fb2eff
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: ebc43d40-8e10-4dff-baa4-abb723cdc80b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column year
+		formatString: 0
+		lineageTag: c5a967c4-2f5b-49fd-86ea-91d998895652
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_no
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f3d8599-9110-48cc-bc78-4d4ca165c2df
+		summarizeBy: sum
+		sourceColumn: [month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		lineageTag: 33cfd7e5-ab96-4314-980c-44b2d12adab5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [month_name]
+		sortByColumn: Column
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'start of month' = ```
+			STARTOFMONTH(cal[Date]) 
+			```
+		formatString: General Date
+		lineageTag: 73c973a5-2e41-4b65-b1f3-3fd3edc637a1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'end of month' = ```
+			ENDOFMONTH(cal[Date]) 
+			```
+		formatString: General Date
+		lineageTag: ad3fa59c-45c7-4ef0-a443-c28de1c03f0c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column weak = WEEKNUM(cal[Date])
+		formatString: 0
+		lineageTag: 30e550c9-cb14-48d4-ab9f-df5e322cb034
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column qu = QUARTER(cal[Date])
+		formatString: 0
+		lineageTag: c9a846c9-e095-4f03-a02e-0617cb6166a3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column weakday = WEEKDAY(cal[Date])
+		formatString: 0
+		lineageTag: 6aa1fac5-f732-4dcb-86c7-a0d55b8cdc73
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column prev_month = ```
+			EDATE(cal[Date],-1) 
+			```
+		formatString: General Date
+		lineageTag: 79214b57-f5ac-4786-8609-12e2c1c75f72
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column quaters = QUARTER(cal[Date])
+		formatString: 0
+		lineageTag: 7b281423-3301-4f9c-b775-53d2e81a5e4c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = IF(cal[month_no]>3,cal[month_no]-3,cal[month_no]+9)
+		formatString: 0
+		lineageTag: 6c91a3d1-6428-4590-a4ba-55c572fb2a2e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cal = calculated
+		mode: import
+		source = ADDCOLUMNS(CALENDAR(MIN(Orders[Order Date]),MAX(Orders[Order Date])),"year",YEAR([date]),"month",MONTH([Date]),"month_name",FORMAT([Date],"MMMM"))
+
+	annotation PBI_Id = 885adb5c327940e98dec2eab007fdee0
+

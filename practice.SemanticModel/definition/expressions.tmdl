@@ -1,0 +1,21 @@
+expression Parameter1 = "Furniture" meta [IsParameterQuery=true, List={"Furniture"}, DefaultValue="Furniture", Type="Any", IsParameterQueryRequired=true]
+	lineageTag: 28d944fb-95ac-4c7d-9482-686250dff7d6
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression RangeStart = #datetime(2014, 11, 11, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 69a8b16b-62e4-4401-8ca2-0e8eb334b5e1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = DateTime
+
+expression RangeEnd = #datetime(2025, 11, 11, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 7e59eb01-c9d6-474d-973d-ed630e821e40
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = DateTime
+

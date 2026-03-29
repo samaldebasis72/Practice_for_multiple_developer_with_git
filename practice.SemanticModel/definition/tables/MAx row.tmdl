@@ -1,0 +1,54 @@
+table 'MAx row'
+	lineageTag: 01eb8fe0-7c23-45cf-a44f-8a2021574f16
+
+	column A
+		dataType: int64
+		formatString: 0
+		lineageTag: cd66d581-f0a3-4235-b2de-ebe1dd1ecddd
+		summarizeBy: sum
+		sourceColumn: A
+
+		annotation SummarizationSetBy = Automatic
+
+	column B
+		dataType: int64
+		formatString: 0
+		lineageTag: 554181bf-8052-4592-b9a9-88186fed70c2
+		summarizeBy: sum
+		sourceColumn: B
+
+		annotation SummarizationSetBy = Automatic
+
+	column C
+		dataType: int64
+		formatString: 0
+		lineageTag: d0141bb2-198e-4411-b98d-3a999160b104
+		summarizeBy: sum
+		sourceColumn: C
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Max row' =
+			MAX(
+			     MAX('MAx row'[A],'MAx row'[B]),
+			     'MAx row'[C])
+		formatString: 0
+		lineageTag: 2efc27f0-b87e-48de-a8e3-486a25b95e27
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MAx row' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMjQwUNJRMgKTxkZGSrE60UpGxkCOuQWQsASKg0QgqoxNQEoNlWJjAQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"3" = _t, #"4" = _t, #"5" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"3", Int64.Type}, {"4", Int64.Type}, {"5", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"3", "A"}, {"4", "B"}, {"5", "C"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

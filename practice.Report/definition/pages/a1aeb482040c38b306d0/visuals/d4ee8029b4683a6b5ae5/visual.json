@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "d4ee8029b4683a6b5ae5",
+  "position": {
+    "x": 14.129692832764505,
+    "y": 125.93856655290102,
+    "z": 0,
+    "height": 166.48464163822527,
+    "width": 187.9863481228669,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Rankkkkk"
+                    }
+                  },
+                  "Property": "Name"
+                }
+              },
+              "queryRef": "Rankkkkk.Name",
+              "nativeQueryRef": "Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Rankkkkk"
+                    }
+                  },
+                  "Property": "sal"
+                }
+              },
+              "queryRef": "Rankkkkk.sal",
+              "nativeQueryRef": "sal"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measure"
+                    }
+                  },
+                  "Property": "Measure 8"
+                }
+              },
+              "queryRef": "_Measure.Measure 8",
+              "nativeQueryRef": "Measure 8"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measure"
+                  }
+                },
+                "Property": "Measure 8"
+              }
+            },
+            "direction": "Ascending"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Rankkkkk"
+                  }
+                },
+                "Property": "sal"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

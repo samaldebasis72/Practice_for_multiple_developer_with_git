@@ -1,0 +1,47 @@
+table sal
+	lineageTag: 2680e34f-2bab-4814-91ba-44140d612a35
+
+	column sal
+		lineageTag: 77897244-6ec0-4d84-901b-6f094753f1b6
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'sal Order'
+
+		relatedColumnDetails
+			groupByColumn: 'sal Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'sal Fields'
+		lineageTag: 554fab29-97ee-4aa7-8183-adba1dfb993a
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'sal Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'sal Order'
+		formatString: 0
+		lineageTag: b1d1db21-5adf-4407-bf11-46ba26388658
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sal = calculated
+		mode: import
+		source =
+				{
+				    ("City", NAMEOF('Orders'[City]), 0),
+				    ("Country", NAMEOF('Orders'[Country]), 1),
+				    ("Status", NAMEOF('People'[Status]), 2)
+				}
+
+	annotation PBI_Id = 4856d77c922d43149195be0c8e739198
+

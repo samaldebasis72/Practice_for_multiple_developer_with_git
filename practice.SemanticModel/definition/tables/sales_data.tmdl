@@ -1,0 +1,58 @@
+table sales_data
+	lineageTag: 2eed4801-d860-4721-903d-5a5f205e9779
+
+	column Sales_ID
+		dataType: string
+		lineageTag: 15951f50-064b-4469-8c51-d55210a6f14a
+		summarizeBy: none
+		sourceColumn: Sales_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: string
+		lineageTag: 4640a5b5-1510-4bd1-8f05-24fda31a02b6
+		summarizeBy: none
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: string
+		lineageTag: 41c5fff2-b573-4448-82a7-f00e04ba7247
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_no = ```
+			MONTH([date]) 
+			```
+		formatString: 0
+		lineageTag: 1f6d24b2-1162-42b9-8510-355318c8e367
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column prt
+		dataType: string
+		lineageTag: 7ea16796-0fca-4b7f-9d52-c536f843e677
+		summarizeBy: none
+		sourceColumn: prt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_data = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("D:\personal\int\sales_data_120.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,423 @@
+table _Measure
+	lineageTag: 32ce2edc-b5da-4195-a266-2344d1a55e67
+
+	measure total_sales = ```
+			SUM(Orders[Sales]) 
+			```
+		lineageTag: 700935cc-e9bb-4742-a0b0-cc9be9d8011c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'total cost' = ```
+			SUM(Orders[Shipping Cost]) 
+			```
+		lineageTag: 69db61c0-770e-4a4f-8c5b-478e640bb993
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure % = DIVIDE([total_sales],CALCULATE([total_sales],ALL(Orders[Country])))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: a4c003c9-312f-4a8d-8bd2-d19432e6a586
+
+	measure Measure = CALCULATE([total_sales],DATESINPERIOD(Orders[Order Date],MAX(cal[Date]),-1,MONTH))
+		lineageTag: 3fb14c8e-bbd3-43f2-8fa9-028f0b4d1ca5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'crossfilter 2' = CALCULATE(DISTINCTCOUNT(Returns[Order ID]),CROSSFILTER(Orders[Order ID],Returns[Order ID],Both))
+		displayFolder: tt
+		lineageTag: 3ac88235-49b5-4602-8bb4-2187b1386529
+
+	measure treatas = ```
+			CALCULATE(COUNT(People[Manager]),TREATAS(VALUES(Orders[Region]),Returns[Region])) 
+			```
+		formatString: 0
+		lineageTag: 249c585e-6690-4755-b8e7-e45b83a39e4a
+
+	measure 'Measure 2' = COUNT(People[Manager])
+		formatString: 0
+		lineageTag: a4314544-a17a-499f-babb-6cff5d733c02
+
+	measure 'Australia  & mexico sales' = CALCULATE([total_sales],FILTER(ALL(Orders[Country]),Orders[Country]="united states" ))
+		displayFolder: tt
+		lineageTag: d2b3448e-1a8c-4344-8857-b24a8f84a5c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'dates ytd' = CALCULATE([total_sales],DATESYTD(Orders[Order Date]),Orders[Country]="united states")
+		displayFolder: tt
+		lineageTag: 54e9474c-1ece-4787-b148-1dbeb5f7f5af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'total ytd' = TOTALYTD([total_sales],Orders[Order Date],Orders[Country]="united states")
+		formatString: 0
+		lineageTag: b465f42e-b992-45ee-a23c-38d6d2d4dc1a
+
+	measure wow1 = CALCULATE([total_sales],cal[weak]=MAX(cal[weak])-1)
+		lineageTag: e57e7484-fc41-467a-be74-f01eb4ee038b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'cumilative sum' = CALCULATE([total_sales],FILTER(ALL(Orders),Orders[Market]<=MAX(Orders[Market])))
+		displayFolder: tt
+		lineageTag: 929c7647-21fb-4cef-84e8-544aca86ccd0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'measure with filter' = CALCULATE([total_sales],FILTER(ALL(Orders),[total cost]>50))
+		lineageTag: f4950846-f3fb-467a-8e94-e0130829c527
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'lattest 2month sales' = CALCULATE([total_sales],DATESINPERIOD(Orders[Order Date],LASTDATE(Orders[Order Date]),-2,MONTH))
+		lineageTag: 41d45b7a-98b6-4406-950b-ca86ec6d6d1e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'last month sales' = ```
+			VAR start_date=EOMONTH(LASTDATE(Orders[Order Date]),-2)+1
+			VAR end_date=EOMONTH(LASTDATE(Orders[Order Date]),-1)
+			RETURN CALCULATE([total_sales],DATESBETWEEN(Orders[Order Date],start_date,end_date))
+			
+			```
+		displayFolder: tt
+		lineageTag: f17782c6-4e13-481c-be1a-f820789de9ec
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'china and sales <10000' = CALCULATE([total_sales],FILTER((Orders),Orders[Country]="China" && Orders[Sales]>1000))
+		displayFolder: tt
+		lineageTag: 17613d9e-461c-420a-8b54-6cb8ffaaaf63
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'monthly besr sales' = SUMX(TOPN(1,Orders,[total_sales],DESC),[total_sales])
+		lineageTag: 41bc6f57-6bc2-46a4-a49a-f80bf83902b2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'rank of products' = RANKX(ALL(Orders[Product Name]),[total_sales],,DESC,Dense)
+		formatString: 0
+		lineageTag: 850a3910-9f8a-42de-8bac-5ca6e7458825
+
+	measure 'top 20 para meter' = IF([rank of products]<='top 20'[top 20 Value],[total_sales],BLANK())
+		lineageTag: e15b2061-1738-405d-ba6a-f33bffc1e627
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure cumulative = CALCULATE([total_sales],FILTER(ALL(cal[month_no]),cal[month_no]<=MAX(cal[month_no])))
+		lineageTag: 30e7f3b7-8a05-40c1-a5fa-6a758d352f3a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure rolling = ```
+			CALCULATE([total_sales],DATESINPERIOD(cal[Date],LASTDATE(cal[Date]),-2,MONTH)) 
+			```
+		lineageTag: 353991d2-244c-474f-b314-01b2ca930d5c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'aus and china' = CALCULATE([total_sales],FILTER(Orders,Orders[Country] ="china" || Orders[Country]="France" && Orders[Sales]>1000))
+		isHidden
+		displayFolder: Revesion
+		lineageTag: 427d967d-67a1-454c-a909-4546816120de
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 3' = CALCULATE([total_sales],PREVIOUSQUARTER(cal[Date]))
+		lineageTag: bd68fc80-58ca-4372-b213-1658a7e08c65
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure last = CALCULATE([total_sales],DATESBETWEEN(cal[Date],EOMONTH(LASTDATE(cal[Date]),-2)+1,EOMONTH(LASTDATE(cal[Date]),-1)))
+		displayFolder: Revision
+		lineageTag: 32ad253e-5ad5-4b6b-a47e-b4daef421702
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MOM = CALCULATE([total_sales],PREVIOUSMONTH(cal[Date]))
+		lineageTag: 66f87f0b-bea8-49ed-8153-9cd668bc46ef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure firstnonblank = LASTNONBLANK(cal[Date],[total_sales])
+		formatString: General Date
+		lineageTag: 65d498e9-7cc1-4f1f-90a0-a0766f0a0e22
+
+	measure dod_1 = CALCULATE([total_sales],PREVIOUSDAY(cal[Date]))
+		lineageTag: 4a699e26-db51-4046-aa47-c45edda1e3fe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure YOY_1 = CALCULATE([total_sales],PREVIOUSYEAR(cal[Date]))
+		lineageTag: 5e882883-cb9a-4974-83a1-9175bbebf87b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure qoq = CALCULATE([total_sales],PREVIOUSQUARTER(cal[quaters]))
+		lineageTag: 409faff1-9fb8-464f-97e5-47ff6e13f4e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure QoQ1 = CALCULATE([total_sales],PREVIOUSQUARTER(cal[Date]))
+		lineageTag: ff4097ce-c13c-4ff5-a619-3fa2ba40e31a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ytd = CALCULATE([total_sales],DATESYTD(cal[Date]))
+		lineageTag: b01b177c-7fe2-4da6-ac23-cc946f47ad7c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MTD = CALCULATE([total_sales],DATESMTD(cal[Date]))
+		lineageTag: a1b64d99-a714-4082-ab43-6616f7c834ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure QTD = ```
+			CALCULATE([total_sales],DATESQTD(cal[Date])) 
+			```
+		lineageTag: a628f7a7-19df-4fd3-8d08-f309071168fc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure lastyearsameperiod1 = CALCULATE([total_sales],SAMEPERIODLASTYEAR(cal[Date]))
+		lineageTag: 27354511-ac5e-4d11-ab56-7e33534b0666
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure jan2015 = CALCULATE([total_sales],cal[year]=2015 && cal[month_name]="January")
+		lineageTag: e9aa1ce8-e563-4f6e-8306-091421d5cbaa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Central us sales' = CALCULATE([total_sales],FILTER(Orders,Orders[Region]="Central us"|| Orders[Region]="Eastern Asia" && [total_sales]>100000) )
+		displayFolder: Revision
+		lineageTag: ec5c82b0-1bfc-49e4-b41f-def27fa27732
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Rank = ```
+			IF(HASONEVALUE(Orders[Region]),
+			RANKX(
+			    
+			        ALL(Orders[Region]),
+			     
+			    [total_sales],
+			    ,
+			    DESC,
+			    Dense
+			))
+			```
+		formatString: 0
+		lineageTag: b229fe3b-06ef-4d36-9f2c-f47b263b7f88
+
+	measure all1 = CALCULATE([total_sales],ALL(Orders[Region]))
+		lineageTag: 4329cbba-17ff-47bd-ae4b-15374d0f5be9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure allsel = CALCULATE([total_sales],ALLSELECTED(Orders))
+		lineageTag: 038bec9b-865f-426b-a958-08f638d5d8be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure allexcept = CALCULATE([total_sales],ALLEXCEPT(Orders,Orders[Region]))
+		lineageTag: a784bf37-36cd-4056-af38-354158fa6cde
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'cascade sliser' = INT(NOT(ISEMPTY(Orders)))
+		formatString: 0
+		lineageTag: 1af81efe-17db-4783-b649-9a42f32b003d
+
+	measure Rankxxxx = RANKX(FILTER(ALL('partition by'),'partition by'[nme]=MAX('partition by'[nme])),[totalsaless],,DESC,Dense)
+		formatString: 0
+		lineageTag: b2a31b00-1648-45a2-b156-415f6dd23f16
+
+	measure totalsaless = ```
+			SUM('partition by'[sales]) 
+			```
+		formatString: 0
+		lineageTag: 78ab8112-684d-41b7-ac1c-4248e594ef9d
+
+	measure max = ```
+			var a= MAXx(ALL(Orders),[total_sales]) 
+			RETURN IF(a=[total_sales],a,BLANK())
+			```
+		lineageTag: b772d241-d9de-4948-b9c6-af82fd61bffd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 4' = ```
+			COUNT(Orders[Category]) 
+			```
+		formatString: 0
+		lineageTag: 75bd2e1b-4b1f-45f3-980a-1504b44b1b6d
+
+	measure 'Measure 5' = COUNTROWS(Orders)
+		formatString: 0
+		lineageTag: 4081d673-e6d2-42d4-aaf1-c45eed9fdd9c
+
+	measure custom_titles = IF(ISFILTERED(Orders[Region]),"total sales by"&SELECTEDVALUE(Orders[Region]),"total sales by country" )
+		lineageTag: d603b599-0b90-4768-a924-d6cd776e92b5
+
+	measure 'custom_titles for multiple selection' = ```
+			var multiple=CONCATENATEX(DISTINCT(Orders[Region]),Orders[Region],",")
+			 
+			 
+			 
+			 var result=IF(ISFILTERED(Orders[Region]),"total sales by"&SELECTEDVALUE(Orders[Region],multiple),"total sales by country" )
+			 RETURN result
+			```
+		lineageTag: 4b494ca8-2bd2-44a9-b7c5-559a02058f0c
+
+	measure 'Measure 6' = ```
+			var star=EOMONTH(LASTDATE(cal[Date]),-1)+1
+			var enddate=TODAY()-1
+			RETURN CALCULATE([total_sales],DATESBETWEEN(cal[Date],star,enddate))
+			
+			
+			
+			
+			
+			
+			```
+		lineageTag: d9ebcff4-2eb6-4aba-9ed1-f85f398203a0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure current-2 =
+			var total_amount=SUM(sales_data[Amount])
+			VAR start_date=EOMONTH(TODAY(),-1)+1
+			var enddatee=TODAY()-2
+			var result=CALCULATE(SUM(sales_data[Amount]),DATESBETWEEN(sales_data[Date],start_date,enddatee))
+			RETURN result
+		formatString: 0
+		lineageTag: f2beced0-9a7c-4370-ac53-67e1d1f09c55
+
+	measure cu =
+			var total_amount=SUM(sales_data[Amount])
+			VAR start_date=EOMONTH(TODAY(),-1)+1
+			var enddatee=TODAY()-2
+			var result=CALCULATE(SUM(sales_data[Amount]),DATESBETWEEN(sales_data[Date],start_date,enddatee))
+			RETURN enddatee
+		formatString: General Date
+		lineageTag: db727bc9-57eb-42ed-ad96-b8b1b717ab27
+
+	measure 'Measure 7' = CALCULATE([total_sales],DATESYTD(cal[Date]),FILTER(cal,cal[Date]>=DATE(2015,07,15)))
+		lineageTag: e216cd5d-6514-45d2-8490-17e31dab8ab5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 8' = RANKX(ALL(Rankkkkk[Name]),[ts],,DESC,Dense)
+		formatString: 0
+		lineageTag: 943b8382-68c4-45f6-af7e-8c00a49558c4
+
+	measure ts = CALCULATE(SUM(Rankkkkk[sal]),ALLEXCEPT(Rankkkkk,Rankkkkk[Name]))
+		formatString: 0
+		lineageTag: 1aff2199-b02e-4f08-8eaa-4fed829c50dc
+
+	measure 'total sales by using calculate table' = SUMX(CALCULATETABLE(Orders,Orders[Country]="china"),[total_sales])
+		lineageTag: 3af40a48-19ef-43f1-a5a4-b7867d7a243d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 9' = CALCULATE([total_sales],Orders[Country]="china")
+		lineageTag: b54efea1-c45e-4097-b2a9-6f89343fcf28
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure rn = RANKX(ALL(Orders[City]),[total_sales],,DESC,Dense)
+		formatString: 0
+		lineageTag: e8dd0a42-a33d-4df3-89a5-e92b01e89716
+
+	measure 'Measure 10' = IF([rn]<=Parameter[Parameter Value],[total_sales])
+		lineageTag: b53dbf9c-ca15-494e-877b-30fe4e6ef700
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 11' = CALCULATE([total_sales])
+		lineageTag: aa9e4c6f-b401-4f38-b46d-514d13523cf7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 121' = CALCULATE([total_sales],FILTER(ALL(Orders),Orders[Category]="Technology"))
+		lineageTag: dd4f8bb2-6dd9-4639-84e7-54f02786c221
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 12' = CALCULATE([total_sales],FILTER(Orders,Orders[Category]="Technology"))
+		lineageTag: 5c8c735b-d074-4abe-acbc-b8f5d9ae024d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 13' = CALCULATE([total_sales],REMOVEFILTERS(Orders[Category]))
+		lineageTag: 50a9cb95-1533-4502-bada-d74cb84998fb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 14' =
+			var a=CONCATENATEX(DISTINCT(Orders[Country]),Orders[Country]," and ")
+			RETURN IF(ISFILTERED(Orders[Country]),"total sales by catagory"&SELECTEDVALUE(Orders[Country],a),BLANK())
+		lineageTag: 47f3dec6-f8b2-4c4f-b8fa-4f1ea92c89a3
+
+	measure 'Measure 15' =
+			CALCULATE([total_sales],FILTER(
+			    ALL(Orders[Country]),Orders[Country]<=MAX(Orders[Country])))
+		lineageTag: ebaf26ed-a2d4-4083-8337-183887fb850c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 16' = CALCULATE([total_sales],REMOVEFILTERS())
+		lineageTag: 615f2f28-f0aa-4132-9aea-3c0b1ab2c5fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Measure 17' = IF([rr]<='Parameter 2'[Parameter Value 2],[total_sales],BLANK())
+		lineageTag: 5905848e-d713-416c-a826-38f35e650fc4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure rr = RANKX(ALL(Orders[City]),[total_sales],,DESC,Dense)
+		formatString: 0
+		lineageTag: a18da8d2-80f1-4ef7-8643-3f104de7cbb6
+
+	measure Zero = ```
+			0 
+			```
+		formatString: 0
+		lineageTag: 85990e85-6ff5-45dd-9adb-9933f6ef6d37
+
+	measure Dynamic_slicer
+		lineageTag: 9167cd3f-b34e-4046-9914-066f53b6317f
+
+	measure 'dynamic slicer' = SWITCH(SELECTEDVALUE(Dynamic_slicer[dynamic_slicer]),"sales",[total_sales],"cost",[total cost],"profit",[total_profit] )
+		lineageTag: 0b13a0f4-42f2-46a6-838c-ff71674dc75f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure total_profit = ```
+			SUM(Orders[Profit]) 
+			```
+		lineageTag: b9d5436e-61c5-49ee-8dc3-6b45188ac23f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

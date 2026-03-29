@@ -1,0 +1,271 @@
+table 'calculate table'
+	lineageTag: 742e77d2-fd6f-4a4a-98b6-a58f5274128f
+
+	column Country
+		lineageTag: 001966b4-7bf5-4450-a9e8-e325e310531e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Country]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		lineageTag: da2c61c5-b504-4493-99f5-9141ed8e8694
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Region]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column
+		formatString: General Date
+		lineageTag: 0af169c8-2487-4095-90b8-4bf7b5e13059
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Column]
+
+		variation Variation
+			isDefault
+			relationship: f383382e-b272-47ae-8f01-e61feee72e4c
+			defaultHierarchy: LocalDateTable_b15b6367-72f5-40ba-b3ea-5508d29b8b56.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Column 2'
+		formatString: General Date
+		lineageTag: c81f3d4b-475d-4955-a880-392e07ea7fe3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Column 2]
+
+		variation Variation
+			isDefault
+			relationship: f6e374b2-65b4-4dec-8c77-7626d04420f0
+			defaultHierarchy: LocalDateTable_2290e522-2666-490a-8e2b-6803999c085e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Row ID'
+		formatString: 0
+		lineageTag: f40f82d7-599c-4a83-b313-483ca3dc2619
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: Orders[Row ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order ID'
+		lineageTag: bdf0b679-9ea5-44e8-b2a7-e58088f305c1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Order ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		formatString: General Date
+		lineageTag: 5cc6b84d-bb03-440e-ac4a-ec444e65dbe9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Order Date]
+
+		variation Variation
+			isDefault
+			relationship: 54db86dd-438b-402a-957e-03043a120b7c
+			defaultHierarchy: LocalDateTable_4905d161-9db4-452e-8bff-4a7845ff5622.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship Date'
+		formatString: General Date
+		lineageTag: 441c789e-3b73-41e0-8af6-ef29ee0ac349
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Ship Date]
+
+		variation Variation
+			isDefault
+			relationship: 66f5d437-82c5-49ce-90c9-ec53b062876e
+			defaultHierarchy: LocalDateTable_9ac35381-ce20-4e0c-8204-1593d49804df.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship Mode'
+		lineageTag: 25cbd362-193a-46a7-9485-e63c8c85709c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Ship Mode]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		lineageTag: 4842fd75-b9ba-4224-bc55-e048440b6ed3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Customer ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		lineageTag: e31a50e5-4fa6-4970-9403-c4df1a8ca21b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Customer Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		lineageTag: 928338c5-a882-4171-a4e7-5ae0c4da58e3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Segment]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Postal Code'
+		formatString: 0
+		lineageTag: 7d2d75b0-1b2d-4c0e-a910-66d494084b72
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: Orders[Postal Code]
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		lineageTag: 2a9db6df-b547-44dc-8a65-cb2f99a7c804
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		lineageTag: 49227dba-01bd-46a1-bf33-9cb73d43323c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[State]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Market
+		lineageTag: e139e486-3ff6-449e-9b02-3bc7a1295d63
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Market]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		lineageTag: 98c151a9-d32d-4916-b4d7-ecfee0b50e9f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Product ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		lineageTag: 34c55a09-0da7-4ede-a5ca-b81bf430fda4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Category
+		lineageTag: fa9f51d2-fae9-44f4-bc3a-ba5dade2c71e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Sub-Category]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		lineageTag: 71bb12b3-370c-4331-9cdb-f0bd23b05a7f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Product Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		lineageTag: 060a0d38-985e-4651-82f4-56ea65785905
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Sales]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		formatString: 0
+		lineageTag: ffffef8a-2124-4edd-ac6e-d6c8befe2f9b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Quantity]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Discount
+		lineageTag: 8a099483-1ef3-49cf-b164-0527039e919f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Discount]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		lineageTag: a417b60a-a9b1-4796-8a64-335d1049de89
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Profit]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Shipping Cost'
+		lineageTag: 04808a34-999c-4778-8c9c-43de689a75a4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Shipping Cost]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order Priority'
+		lineageTag: b591a834-4b77-4c99-b30e-454409b579bf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Order Priority]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 95436def-358b-480f-8af0-5961aa93f8cd
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Column 3'
+		lineageTag: 0abcd794-c65e-4ce0-abb6-a52f736df0ff
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: Orders[Column 3]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'calculate table' = calculated
+		mode: import
+		source = CALCULATETABLE(Orders,Orders[Country]="china")
+
+	annotation PBI_Id = 4db0d6f99c5940e9ad26ab95f3ae47eb
+

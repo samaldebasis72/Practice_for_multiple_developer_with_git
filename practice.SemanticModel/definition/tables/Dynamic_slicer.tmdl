@@ -1,0 +1,17 @@
+table Dynamic_slicer
+	lineageTag: bfa42324-ac77-4c2c-a06c-115e244808c0
+
+	column dynamic_slicer
+		lineageTag: aa93cffe-ed5e-4281-af17-0fe1629ff9e1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [dynamic_slicer]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dynamic_slicer = calculated
+		mode: import
+		source = DATATABLE("dynamic_slicer",STRING,{{"sales"},{"profit"},{"cost"}})
+
+	annotation PBI_Id = 5444f1d40deb47689a2e9f4d5bbb8993
+

@@ -1,0 +1,49 @@
+table f1
+	lineageTag: 7bfdcc28-7e46-467f-9b54-59243f5fe34a
+
+	column f1
+		lineageTag: 3cdab560-108a-4e1f-928b-9e78686a575c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'f1 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'f1 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'f1 Fields'
+		isHidden
+		lineageTag: 661e7330-eea4-4c79-b623-c3ece1afb0ea
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'f1 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'f1 Order'
+		isHidden
+		formatString: 0
+		lineageTag: d7c71b1d-a847-4ebc-96d1-70af2c2ca086
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition f1 = calculated
+		mode: import
+		source =
+				{
+				    ("Category", NAMEOF('Orders'[Category]), 0),
+				    ("Country", NAMEOF('Orders'[Country]), 1),
+				    ("Region", NAMEOF('Orders'[Region]), 2)
+				}
+
+	annotation PBI_Id = 5a7475ac7210415488d0bda8cc0bea2e
+

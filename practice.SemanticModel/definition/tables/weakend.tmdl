@@ -1,0 +1,33 @@
+table weakend
+	lineageTag: c9fc93c9-98ac-42a7-a633-3f2ca93961ac
+
+	column Date
+		formatString: General Date
+		lineageTag: fd743e80-f19d-49e7-8f6f-940334d49b32
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: c8aae43d-623e-48ac-a8fb-35d9f35b110c
+			defaultHierarchy: LocalDateTable_c80a1673-0018-400d-bf7c-9899b811ce21.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		lineageTag: 91bbd880-44c5-46e0-b00f-10db733d0e8f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [day]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition weakend = calculated
+		mode: import
+		source =
+				ADDCOLUMNS(FILTER(
+				    CALENDAR(DATE(2024,1,1),DATE(2024,12,31)),WEEKDAY([Date],2)<6),"day",FORMAT([Date],"dddd"))
+
+	annotation PBI_Id = ba1bffd9202141968847e2fb0f2e0b29
+

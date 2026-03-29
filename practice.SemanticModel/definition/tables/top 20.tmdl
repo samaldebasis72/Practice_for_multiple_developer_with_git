@@ -1,0 +1,26 @@
+table 'top 20'
+	lineageTag: d21af0c0-1761-498b-a3af-19895ed7ef7e
+
+	measure 'top 20 Value' = SELECTEDVALUE('top 20'[top 20], 4)
+		formatString: 0
+		lineageTag: 709d8062-23e7-4019-b148-7ab5d522b385
+
+	column 'top 20'
+		formatString: 0
+		lineageTag: e2356ad0-9232-433c-acbb-f9f7a6e37a3d
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'top 20' = calculated
+		mode: import
+		source = GENERATESERIES(1, 20, 1)
+
+	annotation PBI_Id = e5dda2bdef2c4cec83a17b839a1f2652
+

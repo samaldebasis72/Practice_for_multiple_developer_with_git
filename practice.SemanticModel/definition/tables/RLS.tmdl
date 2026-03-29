@@ -1,0 +1,30 @@
+table RLS
+	lineageTag: 6917dd1b-4a7c-401c-a5cf-b69f0ae088dd
+
+	column Region
+		dataType: string
+		lineageTag: 0bbc8f43-567b-4fba-8598-381c0e2de5e5
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email_id
+		dataType: string
+		lineageTag: 0ba954b6-2877-4403-a53b-99fc8ca864d6
+		summarizeBy: none
+		sourceColumn: Email_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCk8tLkktylNwLS3KL0hV0lGyMDAwNzC0tHDIzU/KzKnUS87P1StOVIrViVZyTs0rKUrMUXDMTS3KTE6EKjY0NDLHotg1EWKwY3EmXKWJmREWlf7JqYl5mQSM88svKskg1qHB+aUQxaHB+E2F+R6hDrsTYT4npA7mabg6bA6MBQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Region = _t, Email_id = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Region", type text}, {"Email_id", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

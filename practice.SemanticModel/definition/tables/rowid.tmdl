@@ -1,0 +1,29 @@
+table rowid
+	lineageTag: 92ebd321-3c0d-43db-8871-02512fd6ec1a
+
+	column 40098
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e1c00aa-9848-465f-8bf7-4186b9ef740e
+		summarizeBy: sum
+		sourceColumn: 40098
+
+		annotation SummarizationSetBy = Automatic
+
+	partition rowid = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\80071462\Desktop\super_store.xlsx"), null, true),
+				    rowid_Sheet = Source{[Item="rowid",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(rowid_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Row ID", Int64.Type}}),
+				    #"Promoted Headers1" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers1",{{"40098", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,31 @@
+table Rankkkkk
+	lineageTag: 4ab5f08b-41af-4b99-b2ba-39a88b3c8cf9
+
+	column Name
+		dataType: string
+		lineageTag: 1e64ecef-0731-4f8f-ae40-710a198ddef5
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sal
+		dataType: int64
+		formatString: 0
+		lineageTag: 13e2b46a-d6b0-481f-aff4-fdbe575dc3ad
+		summarizeBy: sum
+		sourceColumn: sal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rankkkkk = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WclTSUTI0MFCK1YGwjaBsJyDbGIltAmU7A9mmQGYsAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Name = _t, sal = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Name", type text}, {"sal", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
